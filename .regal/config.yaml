@@ -1,0 +1,20 @@
+# Treat policy/ as the root for package name resolution.
+# Files under policy/terraform/azurerm/ should use package terraform.azurerm,
+# not policy.terraform.azurerm.
+roots:
+  - policy
+
+rules:
+  idiomatic:
+    # Enforce that package names match directory structure (with roots stripped).
+    # Example: policy/terraform/azurerm/rbac/foo.rego must declare
+    # `package terraform.azurerm.rbac`
+    directory-package-mismatch:
+      level: error
+      # Allow _test suffix convention for test files
+      # This is supposed to be the default, but in practice it is not working
+      # so we explicitly set it here.
+      exclude-test-suffix: true
+    # Disable entrypoint requirement - this is a policy library, not an app
+    no-defined-entrypoint:
+      level: ignore

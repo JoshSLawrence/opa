@@ -1,0 +1,6 @@
+# development environment
+.DS_Store
+.vscode
+.idea
+*~
+*.swp

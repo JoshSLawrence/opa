@@ -1,0 +1,4 @@
+[tools]
+opa = "latest"
+pre-commit = "latest"
+regal = "latest"

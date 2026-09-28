@@ -1,0 +1,41 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        args: ["-x"]
+
+  - repo: local
+    hooks:
+      - id: opa-fmt
+        name: opa fmt
+        entry: opa fmt -w .
+        language: system
+        files: \.rego$
+        pass_filenames: false
+      - id: opa-check
+        name: opa check
+        entry: opa check --strict policy/
+        language: system
+        files: \.rego$
+        pass_filenames: false
+      - id: regal-lint
+        name: regal lint
+        entry: regal lint --format compact policy/
+        language: system
+        files: \.rego$
+        pass_filenames: false
+      - id: opa-test
+        name: opa test
+        entry: opa test ./policy
+        language: system
+        files: \.rego$
+        pass_filenames: false
