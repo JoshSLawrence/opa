@@ -11,10 +11,15 @@ results. Policies are evaluated by OPA, a general-purpose policy engine. Each
 package defines its own output rules and conventions (e.g., `deny`, `allow`,
 `require_review`)—see the package README for specifics.
 
+The repository is organized to support policies for any domain (infrastructure,
+application config, CI/CD pipelines, etc.). Currently, it contains policies for
+Terraform/OpenTofu plan validation, but the structure accommodates any policy
+use case.
+
 You don't need to know Rego to **use** these policies. You just need to:
 
 1. **Provide input** — structured data (JSON) representing what you want to
-   validate (e.g., a Terraform plan)
+   validate (e.g., a Terraform plan, Kubernetes manifest, API request)
 2. **Query a package** — ask OPA to evaluate rules against your input
 3. **Handle the output** — act on the results (block a PR, add reviewers, log
    warnings)
@@ -38,6 +43,9 @@ top-level package defines its own input format, output rules, and conventions.
 | Package | Description | Docs |
 |---------|-------------|------|
 | `terraform` | Terraform/OpenTofu plan validation | [policy/terraform/](policy/terraform/) |
+
+Additional packages can be added for other domains (e.g., `kubernetes`,
+`docker`, `api`, etc.) following the same organizational structure.
 
 When querying policies, you reference the package in the query path:
 
