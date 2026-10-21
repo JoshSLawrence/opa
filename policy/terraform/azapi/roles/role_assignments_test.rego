@@ -19,11 +19,11 @@ import data.terraform.azapi.roles
 
 _role_def_prefix := "/subscriptions/s/providers/Microsoft.Authorization/roleDefinitions"
 
-owner_role_id := sprintf("%s/8e3af657-a8ff-443c-a75c-2fe8c4bcb635", [_role_def_prefix])
+owner_role_id := $"{_role_def_prefix}/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
 
-contributor_role_id := sprintf("%s/b24988ac-6180-42a0-ab88-20f7382dd24c", [_role_def_prefix])
+contributor_role_id := $"{_role_def_prefix}/b24988ac-6180-42a0-ab88-20f7382dd24c"
 
-reader_role_id := sprintf("%s/acdd72a7-3385-48ef-bd42-f606fba81ae7", [_role_def_prefix])
+reader_role_id := $"{_role_def_prefix}/acdd72a7-3385-48ef-bd42-f606fba81ae7"
 
 # azapi v2: body is a decoded object.
 mock_create_owner := {"resource_changes": [{
